@@ -40,6 +40,13 @@ import os
 import concurrent.futures
 import urllib.robotparser
 
+# Язык системы
+import locale
+try:
+    LanguageSystem = locale.getdefaultlocale()[0]
+except:
+    LanguageSystem = 'Неизвестно'
+
 def vp_start_gui():
     '''Starting point when module is the main routine.'''
     global val, w, root, top
@@ -89,7 +96,10 @@ class Toplevel1:
         top.resizable(1,  1)
         # root.iconbitmap('data\\LicenseChecker.ico')
         # top.iconbitmap('ico.ico')
-        top.title("XmlSitemapGenerator от КонтинентСвободы.рф")
+        if LanguageSystem == 'ru_RU':
+            top.title("XmlSitemapGenerator от КонтинентСвободы.рф")
+        else:
+            top.title("XmlSitemapGenerator version 1.1")
         top.configure(background="#d9d9d9")
         top.configure(highlightbackground="#d9d9d9")
         top.configure(highlightcolor="black")
@@ -125,7 +135,10 @@ class Toplevel1:
         self.Button1.configure(highlightbackground="#d9d9d9")
         self.Button1.configure(highlightcolor="black")
         self.Button1.configure(pady="0")
-        self.Button1.configure(text='''Начать''')
+        if LanguageSystem == 'ru_RU':
+            self.Button1.configure(text='''Начать''')
+        else:
+            self.Button1.configure(text='''Start''')
 
         self.Label1 = tk.Label(self.Frame1)
         self.Label1.place(relx=0.082, rely=0.086, height=17, width=294)
@@ -136,7 +149,10 @@ class Toplevel1:
         self.Label1.configure(foreground="#000000")
         self.Label1.configure(highlightbackground="#d9d9d9")
         self.Label1.configure(highlightcolor="black")
-        self.Label1.configure(text='''Укажите адрес сайта и нажмите кнопку "Начать"''')
+        if LanguageSystem == 'ru_RU':
+            self.Label1.configure(text='''Укажите адрес сайта и нажмите кнопку "Начать"''')
+        else:
+            self.Label1.configure(text='''Enter the website address and click "Start"''')
 
         self.Frame3 = tk.Frame(top)
         self.Frame3.place(relx=0.599, rely=0.0, relheight=0.189, relwidth=0.408)
@@ -152,7 +168,11 @@ class Toplevel1:
                 , relwidth=0.898)
         self.Labelframe1.configure(relief='groove')
         self.Labelframe1.configure(foreground="black")
-        self.Labelframe1.configure(text='''Статистика:''')
+        if LanguageSystem == 'ru_RU':
+            self.Labelframe1.configure(text='''Статистика:''')
+        else:
+            self.Labelframe1.configure(text='''Statistics:''')
+
         self.Labelframe1.configure(background="#d9d9d9")
         self.Labelframe1.configure(highlightbackground="#d9d9d9")
         self.Labelframe1.configure(highlightcolor="black")
@@ -167,7 +187,10 @@ class Toplevel1:
         self.Label2.configure(foreground="#000000")
         self.Label2.configure(highlightbackground="#d9d9d9")
         self.Label2.configure(highlightcolor="black")
-        self.Label2.configure(text='''Обработано ссылок:''')
+        if LanguageSystem == 'ru_RU':
+            self.Label2.configure(text='''Обработано ссылок:''')
+        else:
+            self.Label2.configure(text='''Processed links:''')
 
         self.Label3 = tk.Label(self.Labelframe1)
         self.Label3.place(relx=0.091, rely=0.474, height=19, width=114
@@ -179,7 +202,10 @@ class Toplevel1:
         self.Label3.configure(foreground="#000000")
         self.Label3.configure(highlightbackground="#d9d9d9")
         self.Label3.configure(highlightcolor="black")
-        self.Label3.configure(text='''Добавлено в карту:''')
+        if LanguageSystem == 'ru_RU':
+            self.Label3.configure(text='''Добавлено в карту:''')
+        else:
+            self.Label3.configure(text='''Added to sitemap:''')
 
         self.lObnStr = tk.Label(self.Labelframe1)
         self.lObnStr.place(relx=0.682, rely=0.237, height=19, width=34
@@ -354,7 +380,11 @@ def StartApp():
 
     # top.configure(title="Идёт поиск веб-страниц")
     def ClickedStart():
-        root.title("Идёт поиск веб-страниц...")
+        if LanguageSystem == 'ru_RU':
+            root.title("Идёт поиск веб-страниц...")
+        else:
+            root.title("The web pages are being searched...")
+
         # global s1
         # Веб-сайт начиная с http:// или https://
         start_url = top.Entry1.get()
@@ -433,8 +463,34 @@ def StartApp():
                 k = k.replace(' октября ', '.10.')
                 k = k.replace(' ноября ', '.11.')
                 k = k.replace(' декабря ', '.12.')
+                k = k.replace(' Jan ', '.01.') 
+                k = k.replace(' Feb ', '.02.') 
+                k = k.replace(' Mar ', '.03.') 
+                k = k.replace(' APR ', '.04.') 
+                k = k.replace(' may ', '.05.') 
+                k = k.replace(' Jun ', '.06.') 
+                k = k.replace(' Jul ', '.07.') 
+                k = k.replace(' Aug ', '.08.') 
+                k = k.replace(' Sep ', '.09.') 
+                k = k.replace(' Oct ', '.10.') 
+                k = k.replace(' Nov ', '.11.') 
+                k = k.replace(' Dec ', '.12.')
+                
+                k = k.replace(' January ', '.01.') 
+                k = k.replace(' February ', '.02.') 
+                k = k.replace(' March  ', '.03.') 
+                k = k.replace(' April ', '.04.') 
+                k = k.replace(' May ', '.05.') 
+                k = k.replace(' June  ', '.06.') 
+                k = k.replace(' July ', '.07.') 
+                k = k.replace(' August ', '.08.') 
+                k = k.replace(' September ', '.09.') 
+                k = k.replace(' October ', '.10.') 
+                k = k.replace(' November ', '.11.') 
+                k = k.replace(' December ', '.12.')
                 g = re.search(r'([Обновлено: ]|[Опубликовано: ]|[Создано: ])+\d{2}[.]+\d{2}[.]+\d{4}', k)
-
+                g = re.search(r'([Updated: ]|[Published: ]|[Created: ])+\d{2}[.]+\d{2}[.]+\d{4}', k)
+                
                 # g = re.search(r'[Обновлено: ]+\d{2}[.]+\d{2}[.]+\d{4}', k)
 
                 if g is None:
@@ -445,6 +501,9 @@ def StartApp():
                     j = j.replace('Обновлено: ', '')
                     j = j.replace('Опубликовано: ', '')
                     j = j.replace('Создано: ', '')
+                    j = j.replace('Updated: ', '')
+                    j = j.replace('Published: ', '')
+                    j = j.replace('Created: ', '')
                     j = j.replace(' ', '')
                     sitemap_file.write('<lastmod>' + j + '</lastmod>\n')
 
@@ -554,10 +613,17 @@ def StartApp():
         # root.textBrowser.setText(sk)
         # text.insert(1.0, sk)
         # tpe.shutdown()
-        root.title("Карта сайта создана - XmlSitemapGenerator от КонтинентСвободы.рф")
-        messagebox.showinfo("Карта сайта создана",
+        if LanguageSystem == 'ru_RU':
+            root.title("Карта сайта создана - XmlSitemapGenerator от КонтинентСвободы.рф")
+            messagebox.showinfo("Карта сайта создана",
                              "Карта сайта создана и сохранена в директории с "
                              "программой.")
+        else:
+            root.title("Site map created - Xml Sitemap Generator")
+            messagebox.showinfo("Site map created",
+            "Site map created and saved in the directory with the program.")
+        
+
 
 
     # top.Entry1.bind('<Return>', startButton)
